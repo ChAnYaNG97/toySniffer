@@ -36,3 +36,5 @@ cmake-build-debug
 ui/ui_MainWindow.ui
 ui/ui_MainWindow.h
 dialog
+.idea
+.vscode
