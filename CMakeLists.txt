@@ -1,0 +1,30 @@
+cmake_minimum_required(VERSION 3.0)
+project(toySniffer)
+set(SOURCES src/toySniffer.cpp src/SnifferThread.cpp src/SnifferThread.h)
+set(Qt5Core_DIR /Users/yangchen/Qt/5.10.0/clang_64/lib/cmake/Qt5Core)
+set(Qt5Gui_DIR /Users/yangchen/Qt/5.10.0/clang_64/lib/cmake/Qt5Gui)
+set(Qt5Widgets_DIR /Users/yangchen/Qt/5.10.0/clang_64/lib/cmake/Qt5Widgets)
+set(Qt5Network_DIR /Users/yangchen/Qt/5.10.0/clang_64/lib/cmake/Qt5Network)
+# Find includes in corresponding build directories
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+# Instruct CMake to run moc automatically when needed.
+set(CMAKE_AUTOMOC ON)
+include_directories(src dialog ui)
+include_directories(/usr/local/include)
+include_directories(/Users/yangchen/Qt/5.10.0/clang_64/include)
+include_directories(/usr/local/Cellar/libpcap/1.8.1/include)
+
+link_directories(/usr/local/lib)
+link_directories(/usr/local/Cellar/libpcap/1.8.1/lib)
+link_directories(/Users/yangchen/Qt/5.10.0/clang_64/lib)
+
+
+aux_source_directory(ui SOURCE_DIR)
+aux_source_directory(src SOURCE_DIR)
+find_package(Qt5Widgets REQUIRED)
+find_package(Qt5Core REQUIRED)
+find_package(Qt5Gui REQUIRED)
+find_package(Qt5Network REQUIRED)
+set(LOCAL_LIBS Qt5::Widgets Qt5::Core Qt5::Gui Qt5::Network pcap)
+add_executable(${PROJECT_NAME} ${SOURCE_DIR} ${SOURCES})
+target_link_libraries(${PROJECT_NAME} ${LOCAL_LIBS})
